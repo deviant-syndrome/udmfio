@@ -1,8 +1,9 @@
 import re
 
 
-def read_extensions():
-    with open("data/extensions/zdoom.txt", 'r') as f:
+# "data/extensions/zdoom.txt
+def read_extensions(file_path: str = None):
+    with open(file_path, 'r') as f:
         extensions = f.read()
     extensions = extensions.split('\n')
     for idx, line in enumerate(extensions):
@@ -32,7 +33,8 @@ if __name__ == '__main__':
     with open("data/udmf.txt", 'r') as f:
         udmf_spec = f.read()
 
-    extensions = read_extensions()
+    extensions = read_extensions("data/extensions/zdoom.txt")
+    extensions.extend(read_extensions("data/extensions/slade.txt"))
     spec = udmf_spec
     class_field_re = re.compile(r'\s*(\w+)\s*=\s*<(\w+)>;')
 

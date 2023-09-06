@@ -1,0 +1,8 @@
+thing
+{
+  flags = <int>;           // I have no idea what it is.
+
+  * NOTE
+  This field is not mentioned neither in the UDMF specification, nor in it's extensions.
+  SLADE3 map editor writes it. I'll leave it here for compatibility reasons.
+}
