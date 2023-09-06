@@ -39,6 +39,8 @@ def create_udmf_map(parser_output: UDMFOutputType) -> UDMFMap:
     udmf_map = UDMFMap()
     property_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
 
+    udmf_map.namespace = property_dict['namespace']
+
     for token_type, properties in parser_output:
         # Append the properties dictionary to the list for the given token_type
         property_dict[token_type].append({prop: value for prop, value in properties})

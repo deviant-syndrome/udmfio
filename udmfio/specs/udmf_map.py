@@ -1,5 +1,6 @@
 class UDMFMap:
     def __init__(self):
+        self.namespace = None
         self.linedefs = []
         self.vertexes = []
         self.sidedefs = []

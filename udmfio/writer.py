@@ -114,6 +114,8 @@ def write_udmf_map(udmf_map: UDMFMap, file_path: str) -> None:
         it writes each component's UDMF representation to the specified file.
     """
     with open(file_path, 'w') as f:
+        # Writing Header
+        f.write('namespace = "{}";\n'.format(udmf_map.namespace))
         # Writing Linedefs
         for linedef in udmf_map.linedefs:
             udmf_linedef = UDMFLinedef(linedef)
