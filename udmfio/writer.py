@@ -1,5 +1,4 @@
-from udmfio import UDMFMap
-
+from .specs.udmf_map import UDMFMap
 from .specs.linedef import Linedef
 from .specs.sector import Sector
 from .specs.sidedef import Sidedef
