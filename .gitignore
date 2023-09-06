@@ -5,6 +5,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+udmfio_bundled/
 
 # Poetry related
 .poetry-cache/
