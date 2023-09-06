@@ -1,0 +1,19 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "udmfio"
+version = "1.0.0"
+description = "A tool to read and write UDMF files."
+authors = ["Deviant Syndrome"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+# any other dependencies
+ply = "^3.11"
+
+[tool.poetry.dev-dependencies]
+# development dependencies like testing tools
+

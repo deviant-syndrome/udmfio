@@ -1,0 +1,23 @@
+# Python related
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Poetry related
+.poetry-cache/
+
+# IntelliJ IDEA related
+.idea/
+*.iml
+
+# macOS generated files
+.DS_Store
+
+# Logs
+*.log
+
+# Backup files
+*~

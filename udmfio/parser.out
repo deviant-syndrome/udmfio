@@ -1,0 +1,276 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BLOCK_COMMENT
+    COMMENT
+
+Grammar
+
+Rule 0     S' -> translation_unit
+Rule 1     translation_unit -> global_expr_list
+Rule 2     global_expr_list -> global_expr global_expr_list
+Rule 3     global_expr_list -> <empty>
+Rule 4     global_expr -> block
+Rule 5     global_expr -> assignment_expr
+Rule 6     block -> IDENTIFIER LBRACE expr_list RBRACE
+Rule 7     expr_list -> assignment_expr expr_list
+Rule 8     expr_list -> <empty>
+Rule 9     assignment_expr -> IDENTIFIER ASSIGN value SEMICOLON
+Rule 10    assignment_expr -> IDENTIFIER SEMICOLON
+Rule 11    value -> INTEGER
+Rule 12    value -> FLOAT
+Rule 13    value -> QUOTED_STRING
+Rule 14    value -> TRUE
+Rule 15    value -> FALSE
+
+Terminals, with rules where they appear
+
+ASSIGN               : 9
+BLOCK_COMMENT        : 
+COMMENT              : 
+FALSE                : 15
+FLOAT                : 12
+IDENTIFIER           : 6 9 10
+INTEGER              : 11
+LBRACE               : 6
+QUOTED_STRING        : 13
+RBRACE               : 6
+SEMICOLON            : 9 10
+TRUE                 : 14
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment_expr      : 5 7
+block                : 4
+expr_list            : 6 7
+global_expr          : 2
+global_expr_list     : 1 2
+translation_unit     : 0
+value                : 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . translation_unit
+    (1) translation_unit -> . global_expr_list
+    (2) global_expr_list -> . global_expr global_expr_list
+    (3) global_expr_list -> .
+    (4) global_expr -> . block
+    (5) global_expr -> . assignment_expr
+    (6) block -> . IDENTIFIER LBRACE expr_list RBRACE
+    (9) assignment_expr -> . IDENTIFIER ASSIGN value SEMICOLON
+    (10) assignment_expr -> . IDENTIFIER SEMICOLON
+
+    $end            reduce using rule 3 (global_expr_list -> .)
+    IDENTIFIER      shift and go to state 6
+
+    translation_unit               shift and go to state 1
+    global_expr_list               shift and go to state 2
+    global_expr                    shift and go to state 3
+    block                          shift and go to state 4
+    assignment_expr                shift and go to state 5
+
+state 1
+
+    (0) S' -> translation_unit .
+
+
+
+state 2
+
+    (1) translation_unit -> global_expr_list .
+
+    $end            reduce using rule 1 (translation_unit -> global_expr_list .)
+
+
+state 3
+
+    (2) global_expr_list -> global_expr . global_expr_list
+    (2) global_expr_list -> . global_expr global_expr_list
+    (3) global_expr_list -> .
+    (4) global_expr -> . block
+    (5) global_expr -> . assignment_expr
+    (6) block -> . IDENTIFIER LBRACE expr_list RBRACE
+    (9) assignment_expr -> . IDENTIFIER ASSIGN value SEMICOLON
+    (10) assignment_expr -> . IDENTIFIER SEMICOLON
+
+    $end            reduce using rule 3 (global_expr_list -> .)
+    IDENTIFIER      shift and go to state 6
+
+    global_expr                    shift and go to state 3
+    global_expr_list               shift and go to state 7
+    block                          shift and go to state 4
+    assignment_expr                shift and go to state 5
+
+state 4
+
+    (4) global_expr -> block .
+
+    IDENTIFIER      reduce using rule 4 (global_expr -> block .)
+    $end            reduce using rule 4 (global_expr -> block .)
+
+
+state 5
+
+    (5) global_expr -> assignment_expr .
+
+    IDENTIFIER      reduce using rule 5 (global_expr -> assignment_expr .)
+    $end            reduce using rule 5 (global_expr -> assignment_expr .)
+
+
+state 6
+
+    (6) block -> IDENTIFIER . LBRACE expr_list RBRACE
+    (9) assignment_expr -> IDENTIFIER . ASSIGN value SEMICOLON
+    (10) assignment_expr -> IDENTIFIER . SEMICOLON
+
+    LBRACE          shift and go to state 8
+    ASSIGN          shift and go to state 9
+    SEMICOLON       shift and go to state 10
+
+
+state 7
+
+    (2) global_expr_list -> global_expr global_expr_list .
+
+    $end            reduce using rule 2 (global_expr_list -> global_expr global_expr_list .)
+
+
+state 8
+
+    (6) block -> IDENTIFIER LBRACE . expr_list RBRACE
+    (7) expr_list -> . assignment_expr expr_list
+    (8) expr_list -> .
+    (9) assignment_expr -> . IDENTIFIER ASSIGN value SEMICOLON
+    (10) assignment_expr -> . IDENTIFIER SEMICOLON
+
+    RBRACE          reduce using rule 8 (expr_list -> .)
+    IDENTIFIER      shift and go to state 11
+
+    expr_list                      shift and go to state 12
+    assignment_expr                shift and go to state 13
+
+state 9
+
+    (9) assignment_expr -> IDENTIFIER ASSIGN . value SEMICOLON
+    (11) value -> . INTEGER
+    (12) value -> . FLOAT
+    (13) value -> . QUOTED_STRING
+    (14) value -> . TRUE
+    (15) value -> . FALSE
+
+    INTEGER         shift and go to state 15
+    FLOAT           shift and go to state 16
+    QUOTED_STRING   shift and go to state 17
+    TRUE            shift and go to state 18
+    FALSE           shift and go to state 19
+
+    value                          shift and go to state 14
+
+state 10
+
+    (10) assignment_expr -> IDENTIFIER SEMICOLON .
+
+    IDENTIFIER      reduce using rule 10 (assignment_expr -> IDENTIFIER SEMICOLON .)
+    $end            reduce using rule 10 (assignment_expr -> IDENTIFIER SEMICOLON .)
+    RBRACE          reduce using rule 10 (assignment_expr -> IDENTIFIER SEMICOLON .)
+
+
+state 11
+
+    (9) assignment_expr -> IDENTIFIER . ASSIGN value SEMICOLON
+    (10) assignment_expr -> IDENTIFIER . SEMICOLON
+
+    ASSIGN          shift and go to state 9
+    SEMICOLON       shift and go to state 10
+
+
+state 12
+
+    (6) block -> IDENTIFIER LBRACE expr_list . RBRACE
+
+    RBRACE          shift and go to state 20
+
+
+state 13
+
+    (7) expr_list -> assignment_expr . expr_list
+    (7) expr_list -> . assignment_expr expr_list
+    (8) expr_list -> .
+    (9) assignment_expr -> . IDENTIFIER ASSIGN value SEMICOLON
+    (10) assignment_expr -> . IDENTIFIER SEMICOLON
+
+    RBRACE          reduce using rule 8 (expr_list -> .)
+    IDENTIFIER      shift and go to state 11
+
+    assignment_expr                shift and go to state 13
+    expr_list                      shift and go to state 21
+
+state 14
+
+    (9) assignment_expr -> IDENTIFIER ASSIGN value . SEMICOLON
+
+    SEMICOLON       shift and go to state 22
+
+
+state 15
+
+    (11) value -> INTEGER .
+
+    SEMICOLON       reduce using rule 11 (value -> INTEGER .)
+
+
+state 16
+
+    (12) value -> FLOAT .
+
+    SEMICOLON       reduce using rule 12 (value -> FLOAT .)
+
+
+state 17
+
+    (13) value -> QUOTED_STRING .
+
+    SEMICOLON       reduce using rule 13 (value -> QUOTED_STRING .)
+
+
+state 18
+
+    (14) value -> TRUE .
+
+    SEMICOLON       reduce using rule 14 (value -> TRUE .)
+
+
+state 19
+
+    (15) value -> FALSE .
+
+    SEMICOLON       reduce using rule 15 (value -> FALSE .)
+
+
+state 20
+
+    (6) block -> IDENTIFIER LBRACE expr_list RBRACE .
+
+    IDENTIFIER      reduce using rule 6 (block -> IDENTIFIER LBRACE expr_list RBRACE .)
+    $end            reduce using rule 6 (block -> IDENTIFIER LBRACE expr_list RBRACE .)
+
+
+state 21
+
+    (7) expr_list -> assignment_expr expr_list .
+
+    RBRACE          reduce using rule 7 (expr_list -> assignment_expr expr_list .)
+
+
+state 22
+
+    (9) assignment_expr -> IDENTIFIER ASSIGN value SEMICOLON .
+
+    IDENTIFIER      reduce using rule 9 (assignment_expr -> IDENTIFIER ASSIGN value SEMICOLON .)
+    $end            reduce using rule 9 (assignment_expr -> IDENTIFIER ASSIGN value SEMICOLON .)
+    RBRACE          reduce using rule 9 (assignment_expr -> IDENTIFIER ASSIGN value SEMICOLON .)
+
