@@ -9,6 +9,7 @@ class TestCreateUDMFMap(unittest.TestCase):
     def setUp(self):
         # This will run before each test
         self.parser_output = [
+            ("namespace", "zdoom"),
             ('thing', [('type', 3004), ('x', -64.0), ('y', 64.0), ('angle', 90)]),
             ('linedef', [('v1', 1), ('v2', 2)]),
             ('vertex', [('x', 10.0), ('y', -5.0)]),

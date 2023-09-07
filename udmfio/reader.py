@@ -1,6 +1,6 @@
 from collections import defaultdict
 from os import PathLike
-from typing import Dict
+from typing import Dict, TextIO
 from typing import Union, Any, List
 
 from .specs.linedef import Linedef
@@ -39,9 +39,13 @@ def create_udmf_map(parser_output: UDMFOutputType) -> UDMFMap:
     udmf_map = UDMFMap()
     property_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
 
-    udmf_map.namespace = property_dict['namespace']
+    # The first element of the parser output is the namespace
+    key, value = parser_output[0]
+    if key != 'namespace':
+        raise TypeError("Expected namespace as first element of parser output, got {}".format(key))
+    udmf_map.namespace = value
 
-    for token_type, properties in parser_output:
+    for token_type, properties in parser_output[1:]:
         # Append the properties dictionary to the list for the given token_type
         property_dict[token_type].append({prop: value for prop, value in properties})
 
@@ -78,12 +82,12 @@ def create_udmf_map(parser_output: UDMFOutputType) -> UDMFMap:
     return udmf_map
 
 
-def load_udmf_map(file_path: Union[str, bytes, PathLike]) -> UDMFMap:
+def load_udmf_map(file_path: Union[str, bytes, PathLike, TextIO]) -> UDMFMap:
     """
     Loads a UDMF map from the provided file path.
 
     Args:
-        file_path (Union[str, bytes, PathLike]): The path to the UDMF file.
+        file_path (Union[str, bytes, PathLike, TextIO]): The path to the UDMF file or a file-like object.
 
     Returns:
         UDMFMap: An object representing the UDMF map with structured data.
