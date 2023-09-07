@@ -1,3 +1,6 @@
+import os
+from typing import TextIO, Union
+
 from .specs.udmf_map import UDMFMap
 from .specs.linedef import Linedef
 from .specs.sector import Sector
@@ -98,13 +101,13 @@ class UDMFThing(Thing, UDMFMixin):
             setattr(self, attr, value)
 
 
-def write_udmf_map(udmf_map: UDMFMap, file_path: str) -> None:
+def write_udmf_map_to_file_like(udmf_map: UDMFMap, f: TextIO) -> None:
     """
     Writes the UDMFMap object to a file in the UDMF format.
 
     Args:
         udmf_map (UDMFMap): An instance of the UDMFMap class, representing a UDMF map.
-        file_path (str): The path to the file where the UDMF map should be written.
+        f (io.TextIOBase): A file-like object
 
     Note:
         This function will overwrite the contents of the file if it already exists.
@@ -113,30 +116,48 @@ def write_udmf_map(udmf_map: UDMFMap, file_path: str) -> None:
         Given an UDMFMap instance with linedefs, sidedefs, sectors, vertices, and things,
         it writes each component's UDMF representation to the specified file.
     """
-    with open(file_path, 'w') as f:
-        # Writing Header
-        f.write('namespace = "{}";\n'.format(udmf_map.namespace))
-        # Writing Linedefs
-        for linedef in udmf_map.linedefs:
-            udmf_linedef = UDMFLinedef(linedef)
-            f.write(udmf_linedef.to_udmf_string())
 
-        # Writing Sidedefs
-        for sidedef in udmf_map.sidedefs:
-            udmf_sidedef = UDMFSidedef(sidedef)
-            f.write(udmf_sidedef.to_udmf_string())
+    # Writing Header
+    f.write('namespace = "{}";\n'.format(udmf_map.namespace))
+    # Writing Linedefs
+    for linedef in udmf_map.linedefs:
+        udmf_linedef = UDMFLinedef(linedef)
+        f.write(udmf_linedef.to_udmf_string())
 
-        # Writing Sectors
-        for sector in udmf_map.sectors:
-            udmf_sector = UDMFSector(sector)
-            f.write(udmf_sector.to_udmf_string())
+    # Writing Sidedefs
+    for sidedef in udmf_map.sidedefs:
+        udmf_sidedef = UDMFSidedef(sidedef)
+        f.write(udmf_sidedef.to_udmf_string())
 
-        # Writing Vertices
-        for vertex in udmf_map.vertexes:
-            udmf_vertex = UDMFVertex(vertex)
-            f.write(udmf_vertex.to_udmf_string())
+    # Writing Sectors
+    for sector in udmf_map.sectors:
+        udmf_sector = UDMFSector(sector)
+        f.write(udmf_sector.to_udmf_string())
 
-        # Writing Things
-        for thing in udmf_map.things:
-            udmf_thing = UDMFThing(thing)
-            f.write(udmf_thing.to_udmf_string())
+    # Writing Vertices
+    for vertex in udmf_map.vertexes:
+        udmf_vertex = UDMFVertex(vertex)
+        f.write(udmf_vertex.to_udmf_string())
+
+    # Writing Things
+    for thing in udmf_map.things:
+        udmf_thing = UDMFThing(thing)
+        f.write(udmf_thing.to_udmf_string())
+
+
+def write_udmf_map(udmf_map: UDMFMap, output:  Union[str, bytes, os.PathLike, TextIO]) -> None:
+    """
+    Writes the UDMFMap object to a file or string buffer in the UDMF format.
+
+    Args:
+        udmf_map (UDMFMap): An instance of the UDMFMap class, representing a UDMF map.
+        output (str or io.TextIOBase): The output can be a string representing a file path or a file-like object.
+
+    Returns:
+        str: If output is 'str', returns the UDMF formatted string. Otherwise, None.
+    """
+    if isinstance(output, (str, bytes, os.PathLike)):
+        with open(output, 'w') as f:
+            write_udmf_map_to_file_like(udmf_map, f)
+    else:
+        write_udmf_map_to_file_like(udmf_map, output)
