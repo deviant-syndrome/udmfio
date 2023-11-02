@@ -18,8 +18,15 @@ cp -r "$PLY_SRC_DIR" "$DEST_LIB_DIR"
 # Update the imports in the parser.ply file inside the bundled_version
 PARSER_FILE_PATH="$BUNDLE_DIR/parser.py"
 
-# Using sed to perform the replacement
-sed -i '' 's/import ply.lex as lex/from .libs.ply import lex/g' "$PARSER_FILE_PATH"
-sed -i '' 's/import ply.yacc as yacc/from .libs.ply import yacc/g' "$PARSER_FILE_PATH"
+# Check the operating system and use the appropriate sed syntax
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS uses BSD sed syntax
+  sed -i '' 's/import ply.lex as lex/from .libs.ply import lex/g' "$PARSER_FILE_PATH"
+  sed -i '' 's/import ply.yacc as yacc/from .libs.ply import yacc/g' "$PARSER_FILE_PATH"
+else
+  # Linux uses GNU sed syntax
+  sed -i 's/import ply.lex as lex/from .libs.ply import lex/g' "$PARSER_FILE_PATH"
+  sed -i 's/import ply.yacc as yacc/from .libs.ply import yacc/g' "$PARSER_FILE_PATH"
+fi
 
 echo "PLY bundled and parser.ply patched successfully in $BUNDLE_DIR!"
