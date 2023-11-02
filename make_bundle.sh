@@ -19,7 +19,7 @@ cp -r "$PLY_SRC_DIR" "$DEST_LIB_DIR"
 PARSER_FILE_PATH="$BUNDLE_DIR/parser.py"
 
 # Check the operating system and use the appropriate sed syntax
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" = "darwin"* ]]; then
   # macOS uses BSD sed syntax
   sed -i '' 's/import ply.lex as lex/from .libs.ply import lex/g' "$PARSER_FILE_PATH"
   sed -i '' 's/import ply.yacc as yacc/from .libs.ply import yacc/g' "$PARSER_FILE_PATH"
