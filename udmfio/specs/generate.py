@@ -16,17 +16,19 @@ def read_extensions(file_path: str = None):
 
 
 def find_extensions(extensions, class_name):
-    class_begin = 0
-    class_end = 0
+    extensions_acc = []
     for idx, extension in enumerate(extensions):
         if extension == class_name:
+            print("Found class:", class_name)
             class_begin = idx
             rest = extensions[idx:]
+            class_end = 0
             for idx2, line in enumerate(rest):
                 if line.startswith('}'):
                     class_end = idx + idx2
+                    extensions_acc.extend(extensions[class_begin + 2:class_end])
                     break
-    return extensions[class_begin + 2:class_end]
+    return extensions_acc
 
 
 if __name__ == '__main__':
@@ -72,7 +74,7 @@ if __name__ == '__main__':
             if match:
                 field_name, field_type = match.groups()
                 if field_name in field_dict.keys():
-                    print(f"Using extension field {field_name} in class {class_name}")
+                    # print(f"Using extension field {field_name} in class {class_name}")
                     continue
                 field_dict[field_name] = field_type
                 init_args.append(f"{field_name}=None")  # todo: default values for different types
