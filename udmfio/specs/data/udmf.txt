@@ -68,7 +68,7 @@ sidedef
    texturebottom = <string>; // Lower texture. Default = "-".                     
    texturemiddle = <string>; // Middle texture. Default = "-".                    
                                                                                
-   sector = <integer>; // Sector index. No valid default.                         
+   sector = <integer>; // Sector index. No valid default.
                                                                                
    comment = <string>; // A comment. Implementors should attach no special        
                        // semantic meaning to this field.                         

@@ -1,0 +1,31 @@
+linedef
+{
+   // VkDoom / Voidgate lightmapping specifics
+   // Customizable sampling distance per sidedef. Will use the value from the ZDRayInfo actor by default.
+   lm_sampledist = <int>; (default: 0)
+   lm_sampledist_top = <int>; (default: 0)
+   lm_sampledist_mid = <int>; (default: 0)
+   lm_sampledist_bot = <int>; (default: 0)
+}
+
+sidedef
+{
+   // VkDoom / Voidgate lightmapping specifics
+   // Customizable sampling distance per sidedef. Will use the value from the ZDRayInfo actor by default.
+   lm_sampledist = <int>; (default: 0)
+   lm_sampledist_top = <int>; (default: 0)
+   lm_sampledist_mid = <int>; (default: 0)
+   lm_sampledist_bot = <int>; (default: 0)
+}
+
+sector
+{
+   // Customizable sampling distance for floors and ceilings.
+   lm_sampledist_floor = <int>; (default: 0)
+   lm_sampledist_ceiling = <int>; (default: 0)
+
+   // Update the lightmap for the sector every frame when visible in the game.
+   // All sides belonging to the sector will also be affected.
+   // Note that this is computationally expensive, but it allows animated and moving lights.
+   lm_dynamic = <bool>; (default: false)
+}

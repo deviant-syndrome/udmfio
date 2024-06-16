@@ -37,6 +37,8 @@ if __name__ == '__main__':
 
     extensions = read_extensions("data/extensions/zdoom.txt")
     extensions.extend(read_extensions("data/extensions/slade.txt"))
+    extensions.extend(read_extensions("data/extensions/vkdoom.txt"))
+
     spec = udmf_spec
     class_field_re = re.compile(r'\s*(\w+)\s*=\s*<(\w+)>;')
 
