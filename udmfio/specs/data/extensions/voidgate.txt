@@ -1,0 +1,5 @@
+thing
+{
+	// Workaround for the poor arg0str support in SLADE
+	user_scriptname = <string>;
+}
