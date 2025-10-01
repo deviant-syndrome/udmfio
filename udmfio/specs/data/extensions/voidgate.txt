@@ -1,5 +1,15 @@
 thing
 {
 	// Workaround for the poor arg0str support in SLADE
+	// todo: this should be deprecated
 	user_scriptname = <string>;
+
+	// Voidgate specific field for lightmap padding, since it uses sub-optimal lightmap packing algorithm
+	lm_padding = <int>; (default: 0)
+}
+
+// Voidgate specific field for defining a alpha-mask on mid-texture during Lightmapping
+linedef
+{
+  lm_perforation = <int>; (default: 0)
 }
